@@ -3,12 +3,11 @@ import {
   Activity,
   CarFront,
   CircleDollarSign,
-  LogOut,
   RefreshCw,
   Route,
   UsersRound,
 } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { AdminLayout } from '../components/AdminLayout'
 import { getDashboardOverview } from '../api/admin.api'
 import type { DashboardOverview } from '../types/admin.types'
 import { useAuth } from '../../../context/AuthContext'
@@ -19,14 +18,6 @@ type LoadState =
   | { status: 'error'; message: string }
   | { status: 'success'; data: DashboardOverview }
 
-const dateFormatter = new Intl.DateTimeFormat('vi-VN', {
-  weekday: 'long',
-  day: '2-digit',
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'Asia/Ho_Chi_Minh',
-})
-
 const currencyFormatter = new Intl.NumberFormat('vi-VN', {
   style: 'currency',
   currency: 'VND',
@@ -34,12 +25,18 @@ const currencyFormatter = new Intl.NumberFormat('vi-VN', {
 })
 
 export function DashboardPage() {
-  const { token, signOut } = useAuth()
-  const navigate = useNavigate()
+  const { token } = useAuth()
   const [loadState, setLoadState] = useState<LoadState>({ status: 'loading' })
+//   const [loadState, setLoadState] = useState<LoadState>({
+//   status: 'success',
+//   data: {
+//     tripsToday: 0,
+//     vehiclesInUse: 0,
+//     driversOnline: 0,
+//     revenueTodayVnd: 0,
+//   },
+// })
   const [reloadKey, setReloadKey] = useState(0)
-  const [logoutError, setLogoutError] = useState('')
-  const [isSigningOut, setIsSigningOut] = useState(false)
 
   useEffect(() => {
     if (!token) {
@@ -68,19 +65,6 @@ export function DashboardPage() {
       isCurrent = false
     }
   }, [token, reloadKey])
-
-  async function handleSignOut() {
-    setLogoutError('')
-    setIsSigningOut(true)
-    try {
-      await signOut()
-      navigate('/login', { replace: true })
-    } catch (error: unknown) {
-      setLogoutError(getErrorMessage(error, 'Không thể đăng xuất. Vui lòng thử lại.'))
-    } finally {
-      setIsSigningOut(false)
-    }
-  }
 
   const metrics =
     loadState.status === 'success'
@@ -117,57 +101,7 @@ export function DashboardPage() {
       : []
 
   return (
-    <div className="dashboard-layout">
-      <aside className="sidebar">
-        <a className="brand sidebar-brand" href="/dashboard">
-          <span className="brand-mark" aria-hidden="true">
-            GA
-          </span>
-          <span>
-            <strong>GoAnywhere</strong>
-            <small>ADMIN PORTAL</small>
-          </span>
-        </a>
-
-        <div className="sidebar-label">KHÔNG GIAN LÀM VIỆC</div>
-        <nav aria-label="Điều hướng quản trị">
-          <a className="sidebar-link active" href="/dashboard" aria-current="page">
-            <Activity size={19} aria-hidden="true" />
-            <span>Tổng quan</span>
-          </a>
-        </nav>
-
-        <div className="sidebar-bottom">
-          <span className="sidebar-status-dot" />
-          <span>Điều hành GoAnywhere</span>
-        </div>
-      </aside>
-
-      <main className="dashboard-main">
-        <header className="topbar">
-          <div className="breadcrumb">
-            <span>Quản trị</span>
-            <span className="breadcrumb-separator">/</span>
-            <strong>Tổng quan</strong>
-          </div>
-          <div className="topbar-actions">
-            <span className="topbar-date">{dateFormatter.format(new Date())}</span>
-            <span className="admin-avatar" aria-hidden="true">
-              GA
-            </span>
-            <button
-              className="icon-button signout-button"
-              type="button"
-              onClick={handleSignOut}
-              disabled={isSigningOut}
-              aria-label="Đăng xuất"
-              title="Đăng xuất"
-            >
-              <LogOut size={18} aria-hidden="true" />
-            </button>
-          </div>
-        </header>
-
+    <AdminLayout pageTitle="Tổng quan">
         <section className="dashboard-content">
           <div className="page-heading">
             <div>
@@ -189,12 +123,6 @@ export function DashboardPage() {
               Làm mới
             </button>
           </div>
-
-          {logoutError && (
-            <div className="inline-alert" role="alert">
-              {logoutError}
-            </div>
-          )}
 
           <div className="section-heading">
             <div>
@@ -262,7 +190,6 @@ export function DashboardPage() {
             </p>
           </div>
         </section>
-      </main>
-    </div>
+    </AdminLayout>
   )
 }
