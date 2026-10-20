@@ -1,0 +1,25 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+
+# Local credentials, keys, certificates, and private configuration
+*.local
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# Private project rules and AI assistant instructions
+/Rule/
+*.md
+CODEX_*
+.copilot/
+.claude/
+.cursor/rules/
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+.github/agents/
