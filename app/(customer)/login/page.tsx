@@ -45,12 +45,6 @@ export default function LoginPage() {
         password,
       });
 
-      if (!response.token) {
-        throw new Error(
-          "Đăng nhập thành công nhưng Backend không trả token."
-        );
-      }
-
       // TODO: Thiết lập phiên đăng nhập an toàn
       // bằng cookie HttpOnly hoặc Next.js BFF.
 

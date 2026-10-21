@@ -47,6 +47,7 @@ if (useAuth) {
       ...options,
       headers,
       cache: "no-store",
+      credentials: "include"
     });
   } catch {
     throw new Error("Không thể kết nối tới Backend.");
@@ -72,7 +73,7 @@ export function adminLogin(phoneNumber: string, password: string) {
   });
 }
 
-export function getBookingList(params: {
+export function getBookingList(params?: {
   page?: number;
   status?: string;
   bookingCode?: string;
@@ -80,10 +81,10 @@ export function getBookingList(params: {
 }) {
   const search = new URLSearchParams();
 
-  if (params.page) search.set("page", String(params.page));
-  if (params.status) search.set("status", params.status);
-  if (params.bookingCode) search.set("bookingCode", params.bookingCode);
-  if (params.sdt) search.set("sdt", params.sdt);
+  if (params?.page) search.set("page", String(params.page));
+  if (params?.status) search.set("status", params.status);
+  if (params?.bookingCode) search.set("bookingCode", params.bookingCode);
+  if (params?.sdt) search.set("sdt", params.sdt);
 
   return request<BookingListResponse>(
     `/admin/booking/list?${search.toString()}`,

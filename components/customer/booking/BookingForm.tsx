@@ -1,4 +1,4 @@
-﻿
+
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
@@ -160,7 +160,7 @@ useEffect(() => {
                   type="date"
                   className={inputClass}
                   aria-label="Ngày đi"
-                  min={new Date().toLocaleDateString("en-CA")}
+                  min={today}
                   value={booking.date}
                   onChange={(e) => update("date", e.target.value)}
                   required

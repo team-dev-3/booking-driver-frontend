@@ -21,7 +21,8 @@ export default function AdminDashboardPage() {
 
     try {
       const result = await getBookingList({ page: 1 });
-      setItems(result.data?.items || []);
+      const bookingData = Array.isArray(result.data) ? result.data : [];
+      setItems(bookingData);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Không tải được dữ liệu.");
     } finally {

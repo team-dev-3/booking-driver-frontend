@@ -5,24 +5,27 @@ export type AdminLoginResponse = {
 };
 
 export type BookingItem = {
-  id: number;
+  id: string | number;
   bookingCode: string;
-  passengerName: string;
-  passengerPhone: string;
+  customerName?: string;
+  customerPhone?: string;
+  passengerName?: string;
+  passengerPhone?: string;
   routeName?: string;
-  departureTime?: string;
-  seatCount: number;
+  departureTime?: string | Date;
+  seatCount?: number;
   totalFare: number;
-  status?: string;
+  status: string;
 };
 
 export type BookingListResponse = {
   success: boolean;
   message?: string;
-  data?: {
-    items: BookingItem[];
-    total?: number;
-  };
+  data?: BookingItem[];
+  totalBooking?: number;
+  bookingProcessing?: number;
+  bookingDone?: number;
+  revenue?: number;
 };
 
 export type BookingDetail = {

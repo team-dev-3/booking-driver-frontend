@@ -34,11 +34,6 @@ export default function AdminLoginPage() {
     try {
       const response = await adminLogin(phoneNumber.trim(), password);
 
-      if (!response.token) {
-        throw new Error("Backend không trả token.");
-      }
-
-      localStorage.setItem("admin_token", response.token);
       router.replace("/admin");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Đăng nhập thất bại.");
