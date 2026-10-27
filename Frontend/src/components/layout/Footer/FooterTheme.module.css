@@ -1,0 +1,142 @@
+:global(#stitch-page) .footer {
+  background: var(--color-white, #ffffff);
+  border-top: 1px solid var(--color-border, #e2e8f0);
+  color: var(--color-text-secondary, #475569);
+}
+
+:global(#stitch-page) .footer h2 {
+  color: var(--color-text, #0f172a);
+}
+
+:global(#stitch-page) .footer a {
+  color: var(--color-text-secondary, #475569);
+}
+
+:global(#stitch-page) .footer a:hover {
+  color: var(--color-orange, #f59e0b);
+}
+
+:global(#stitch-page) .footer form {
+  min-width: 0;
+}
+
+:global(#stitch-page) .email {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  min-height: var(--touch-target, 44px);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border, #cbd5e1);
+  border-radius: 0 !important; /* Ô input không bo góc */
+  background: var(--color-bg-subtle, #f8fafc);
+  color: var(--color-text, #0f172a);
+  font-size: var(--font-size-sm, 14px);
+}
+
+:global(#stitch-page) .email::placeholder {
+  color: var(--color-text-muted, #94a3b8);
+}
+
+:global(#stitch-page) .signup {
+  padding: var(--space-2) var(--space-4);
+  border-radius: 2px !important; /* Bo góc ít */
+  background: var(--color-yellow, #f59e0b);
+  color: #0f172a;
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-bold, 700);
+}
+
+:global(#stitch-page) .signup:hover {
+  background: var(--color-yellow-light, #fbbf24);
+}
+
+:global(#stitch-page) .footer button[aria-label="Facebook GOMOVE"],
+:global(#stitch-page) .footer button[aria-label="YouTube GOMOVE"] {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 50% !important; /* Hình tròn cho Facebook và YouTube */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+:global(#stitch-page) .fanpage {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 0 !important; /* Bỏ bo góc khung fanpage */
+  background: var(--color-bg-subtle, #f8fafc);
+}
+
+:global(#stitch-page) .avatar {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 0 !important; /* Bỏ bo góc avatar */
+}
+
+:global(#stitch-page) .footer .follow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target, 44px);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border, #e2e8f0);
+  border-radius: 0 !important; /* Bỏ bo góc theo dõi trang */
+  background: var(--color-white, #ffffff);
+  color: var(--color-text, #0f172a);
+  font-size: var(--font-size-xs, 12px);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+:global(#stitch-page) .follow:hover {
+  background: var(--color-bg-muted, #f1f5f9);
+}
+
+/* ========================================================
+   Chỉ để nền xanh ở Văn Phòng Hải Phòng trở xuống
+   ======================================================== */
+:global(#stitch-page) .blueBottomWrapper {
+  background: #075985;
+  color: #e0f2fe;
+}
+
+:global(#stitch-page) .contact {
+  border-top: 1px solid rgb(224 242 254 / .25);
+  background: #075985;
+  color: #e0f2fe;
+}
+
+:global(#stitch-page) .contact strong {
+  color: #ffffff;
+}
+
+:global(#stitch-page) .contact span {
+  color: #bae6fd;
+}
+
+:global(#stitch-page) .contact a[href^="tel:"] {
+  color: #fef08a;
+}
+
+:global(#stitch-page) .copyright {
+  border-top: 1px solid rgb(224 242 254 / .2);
+  background: #03466a;
+  color: #bae6fd;
+}
+
+:global(#stitch-page) .footerLinks {
+  background: #03466a;
+  color: #93c5fd;
+}
+
+:global(#stitch-page) .footerLinks a {
+  color: #bae6fd;
+}
+
+:global(#stitch-page) .footerLinks a:hover {
+  color: #ffffff;
+}

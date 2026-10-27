@@ -1,0 +1,161 @@
+---
+description: Quy tắc phát triển Front-end BookingCar về kiến trúc, chất lượng code, UI, trang chủ, pháp lý, hiệu suất, bảo mật, UX và SEO.
+globs:
+alwaysApply: true
+---
+
+# Quy tắc Front-end — BookingCar
+
+Áp dụng khi thiết kế, viết, sửa và review Front-end của website đặt xe dành cho khách hàng.
+Các yêu cầu bắt buộc là điều kiện phát hành. Không tự ý mở rộng phạm vi công việc để sửa toàn bộ dự án; áp dụng quy tắc vào phần đang thay đổi và báo rõ hạn chế liên quan.
+
+## 1. Kiến trúc website
+
+- Duy trì React, TypeScript và Vite của dự án hiện tại. Chỉ đổi công nghệ nền tảng khi có yêu cầu hoặc lý do được thống nhất.
+- Phân chia theo trách nhiệm và tận dụng cấu trúc hiện có:
+  - `src/pages`: trang hoàn chỉnh.
+  - `src/components/common`: Button, Input, Modal và thành phần dùng chung.
+  - `src/components/layout`: Navbar, Header, Footer và bố cục.
+  - `src/components/sections`: các section trang chủ.
+  - `src/features`: tìm xe, đặt xe, tài khoản khi được triển khai.
+  - `src/services`: giao tiếp API.
+  - `src/hooks`, `src/types`, `src/utils`: logic dùng lại, kiểu dữ liệu và tiện ích.
+- Không tạo thư mục rỗng hoặc tái cấu trúc toàn bộ mã nguồn nếu tác vụ không cần.
+- Tách xử lý nghiệp vụ và gọi API khỏi component trình bày; dùng service và hook theo chức năng.
+- Giữ state tại nơi sử dụng; chỉ đưa lên cấp chung khi nhiều nơi cần.
+- Mỗi trang có URL rõ ràng; truy cập trực tiếp và tải lại URL phải hoạt động.
+- Xử lý đủ trạng thái tải, thành công, không có dữ liệu và lỗi.
+- Tách dữ liệu mock khỏi dữ liệu thật. Demo phải được đánh dấu và không được gửi yêu cầu đặt xe thật ngoài ý muốn.
+
+## 2. Quản lý chất lượng code
+
+- Khai báo kiểu cho props, API và đối tượng nghiệp vụ. Không dùng `any`, `@ts-ignore` hoặc ép kiểu để che lỗi.
+- Component dùng PascalCase; biến và hàm dùng camelCase; custom hook bắt đầu bằng `use`.
+- Tên phải thể hiện mục đích. Mỗi component có trách nhiệm rõ ràng; chỉ tách khi có logic độc lập hoặc nhu cầu tái sử dụng.
+- Tái sử dụng validation, định dạng tiền và ngày giờ; không sao chép logic giữa các trang.
+- Giữ quy ước định dạng và công cụ lint hiện có; không thêm công cụ trùng chức năng tùy tiện.
+- Không để mã chết, log debug hoặc lỗi console liên quan đến thay đổi trong production.
+- Chỉ thêm dependency khi cần; đánh giá dung lượng, khả năng bảo trì và bảo mật.
+- PR phải mô tả hành vi thay đổi và cách kiểm tra; thay đổi UI cần ảnh desktop và mobile.
+- Trước merge, `npm run lint` và `npm run build` phải thành công. Không tuyên bố kiểm tra đã đạt nếu chưa chạy.
+- Kiểm thử hành vi quan trọng: tìm xe, chọn xe, nhập thông tin, xác nhận, lỗi API và ngăn gửi lặp.
+- Không viết test chỉ để lặp lại chi tiết triển khai hoặc kiểm tra thay đổi trình bày đơn giản.
+
+## 3. Quy tắc thiết kế UI
+
+- Dùng token chung cho màu, typography, spacing, border radius và shadow; tránh giá trị tùy ý rải rác.
+- Thành phần cùng chức năng phải có giao diện và hành vi nhất quán.
+- Thiết kế mobile-first; tránh cuộn ngang ngoài ý muốn. Kiểm tra trên màn hình nhỏ, tablet và desktop.
+- Phân cấp rõ tiêu đề, nội dung chính, thông tin bổ sung và hành động.
+- Mỗi nhóm tác vụ có một CTA chính nổi bật; CTA phụ có mức nhấn thấp hơn.
+- Button và Input có các trạng thái phù hợp: mặc định, hover, focus, disabled, loading và error.
+- Input phải có label gắn với trường; placeholder chỉ bổ sung hướng dẫn.
+- Hỗ trợ bàn phím, focus dễ thấy và tên truy cập cho nút chỉ có icon.
+- Không dùng màu sắc làm cách duy nhất để truyền đạt lỗi hoặc trạng thái.
+- Quy ước dự án: vùng chạm chính tối thiểu 44 × 44 px; chữ nội dung mặc định 16 px.
+- Giữ độ tương phản dễ đọc. Modal quản lý focus, hỗ trợ đóng phù hợp và trả focus về nút mở.
+- Ảnh đúng tỷ lệ; nội dung chữ quan trọng phải là HTML thay vì nằm trong ảnh.
+
+## 4. Section trang chủ
+
+Giữ thứ tự mặc định phù hợp cấu trúc hiện tại:
+
+1. `TopBanner`: chỉ dùng khi có thông báo hoặc ưu đãi thật.
+2. `Navbar`: logo, điều hướng, hỗ trợ và tài khoản khi có chức năng.
+3. `HeroSection` và `BookingWidget`: thông điệp chính; điểm đón, điểm đến, ngày, giờ và nút tìm xe.
+4. `ValuePropsSection`: lợi ích cụ thể, có thể chứng minh.
+5. `ServicesSection`: các dịch vụ thực sự được cung cấp.
+6. `FeatureHighlightSection`: giải thích lợi ích cho khách hàng.
+7. `StepGuideSection`: các bước đặt xe khớp luồng thực tế.
+8. `PopularRoutesSection`: tuyến đang phục vụ; ghi rõ giá tham khảo hoặc giá từ.
+9. `CorporateSection`: chỉ hiển thị nếu có dịch vụ doanh nghiệp.
+10. `FaqSection`: đặt xe, giá, hủy chuyến và hỗ trợ.
+11. `CtaBannerSection`: dẫn đến tìm xe hoặc liên hệ.
+12. `Footer`: thông tin đơn vị, liên hệ và liên kết pháp lý.
+
+- Form tìm xe phải dễ thấy và dễ thao tác trên mobile lẫn desktop.
+- Mỗi section có mục đích rõ ràng và heading phù hợp; tránh lặp cùng thông điệp.
+- Nút và liên kết phải hoạt động đúng nội dung đã ghi, không dùng `href="#"` làm liên kết giả.
+- Không tự tạo số liệu, đánh giá, chứng nhận, logo đối tác hoặc cam kết chưa được xác minh.
+- Có thể bỏ section chưa có nội dung thật; không đưa nội dung mẫu vào production.
+
+## 5. Các trang pháp lý
+
+- Chuẩn bị trang Điều khoản sử dụng, Chính sách quyền riêng tư, Chính sách đặt/hủy/hoàn tiền và thông tin liên hệ đơn vị vận hành.
+- Chuẩn bị chính sách cookie khi có cookie hoặc công nghệ theo dõi cần giải thích.
+- Đây là yêu cầu nội dung dự án, không phải kết luận về nghĩa vụ pháp lý. Nội dung áp dụng phải được người phụ trách pháp lý xác nhận trước công bố.
+- Mỗi trang có URL riêng, ngày cập nhật và liên kết từ Footer.
+- Điều kiện hủy, hoàn tiền và phụ phí phải dễ truy cập trước bước xác nhận đặt xe.
+- Nội dung phải khớp vận hành và cách thu thập dữ liệu thực tế.
+- Không tự tạo pháp nhân, giấy phép, chính sách hoặc cam kết chưa được duyệt.
+- Khi cần ghi nhận chấp thuận, hiển thị rõ nội dung, phiên bản điều khoản và cơ chế ghi nhận thống nhất với Backend.
+
+## 6. Tối ưu hiệu suất
+
+- Mục tiêu Core Web Vitals tại phân vị 75, đánh giá riêng mobile và desktop: LCP ≤ 2,5 giây; INP ≤ 200 ms; CLS ≤ 0,1.
+- Ảnh có kích thước phù hợp, khai báo width/height hoặc tỷ lệ; ưu tiên định dạng tối ưu khi có lợi.
+- Lazy-load ảnh ngoài vùng nhìn đầu tiên; không lazy-load ảnh chính ảnh hưởng đến LCP.
+- Chia bundle theo trang hoặc tính năng khi có lợi; tải bản đồ, widget và thư viện nặng khi cần.
+- Hạn chế request trùng; debounce tìm địa chỉ khi phù hợp; hủy hoặc bỏ qua phản hồi cũ khi điều kiện tìm thay đổi.
+- Không dùng memoization tràn lan; tối ưu render dựa trên đo đạc hoặc vấn đề cụ thể.
+- Không cache dữ liệu nhạy cảm trong bộ nhớ dùng chung. Kiểm tra lại giá và tình trạng xe trước xác nhận.
+- Đo trên bản production với thiết bị và mạng mô phỏng; bổ sung số đo người dùng thật khi vận hành.
+- Lighthouse hỗ trợ kiểm tra, không thay thế số đo thực tế và không trực tiếp đo INP trong phép đo tải trang thông thường.
+
+## 7. Quy tắc bảo mật
+
+- Không đưa mật khẩu, secret hoặc khóa đặc quyền vào FE. Biến môi trường được đóng gói cho trình duyệt không phải nơi lưu bí mật.
+- Không lưu session ID hoặc token đăng nhập trong localStorage/sessionStorage. Thống nhất cơ chế phiên với Backend; ưu tiên cookie HttpOnly, Secure và SameSite phù hợp khi kiến trúc cho phép.
+- Không ghi PII, token hoặc dữ liệu thanh toán vào console, URL hoặc công cụ phân tích.
+- Render dữ liệu người dùng an toàn; không dùng `dangerouslySetInnerHTML` với nội dung chưa được làm sạch.
+- Validation FE phục vụ trải nghiệm; Backend phải xác thực lại dữ liệu, quyền, giá và trạng thái đặt xe.
+- Ẩn nút và chặn route không thay thế kiểm tra quyền tại API.
+- Phối hợp Backend/hạ tầng cho HTTPS, cookie bảo mật, chống CSRF khi phù hợp và CSP. Không tuyên bố FE tự giải quyết các yêu cầu phía máy chủ.
+- Chỉ tích hợp script bên thứ ba đã được xét duyệt; rà soát dependency và tránh chạy mã không tin cậy.
+- Không tự lưu hoặc xử lý dữ liệu thẻ ngoài cơ chế của đơn vị thanh toán.
+
+## 8. Quy tắc thiết kế UX
+
+- Luồng chính: nhập hành trình → xem kết quả → chọn xe → nhập thông tin → xem lại → xác nhận.
+- Chỉ hỏi thông tin cần tại từng bước; không ép đăng nhập trước tìm xe nếu nghiệp vụ không yêu cầu.
+- Giữ dữ liệu khi quay lại hoặc gặp lỗi; chỉ lưu bền vững dữ liệu không nhạy cảm khi có nhu cầu rõ ràng.
+- Lỗi đặt gần trường liên quan, giải thích nguyên nhân và cách sửa bằng tiếng Việt dễ hiểu.
+- Kiểm tra điểm đón/đến và ngày giờ theo quy tắc nghiệp vụ. Dùng múi giờ Asia/Ho_Chi_Minh cho hành trình Việt Nam nếu không có yêu cầu khác; thống nhất định dạng thời gian với API.
+- Trước xác nhận phải hiển thị hành trình, xe, thời gian, tổng tiền, phụ phí và điều kiện hủy.
+- Ghi rõ giá ước tính; không trình bày như giá đã xác nhận.
+- Khi hết xe, giải thích và cho đổi thời gian hoặc điều kiện tìm.
+- Ngăn gửi lặp lúc xử lý; phối hợp Backend để chống tạo đơn trùng.
+- Chỉ báo thành công khi Backend xác nhận. Nếu mất kết nối hoặc timeout, cho kiểm tra trạng thái thay vì mặc định tạo lại đơn.
+- Hủy chuyến hoặc xóa dữ liệu cần bước xác nhận phù hợp.
+- Tránh popup cản trở tìm xe, lựa chọn mặc định gây hiểu nhầm và phí chỉ xuất hiện ở bước cuối.
+
+## 9. Thiết kế chuẩn SEO
+
+- Mỗi trang công khai cần SEO có URL ổn định, title và meta description riêng, đúng nội dung.
+- Dùng HTML có ngữ nghĩa và heading có thứ bậc; quy ước dự án là một H1 chính cho mỗi trang.
+- Điều hướng bằng `<a>` có `href` hợp lệ, không chỉ dùng sự kiện click trên div.
+- Nội dung quan trọng phải có thể được công cụ tìm kiếm render. Đánh giá prerender/SSR cho trang công khai cần SEO; không tự đổi framework chỉ để đáp ứng quy tắc này.
+- Cấu hình canonical, sitemap và robots phù hợp; sitemap chỉ chứa trang công khai cần lập chỉ mục.
+- Trang tài khoản, thanh toán và kết quả cá nhân hóa có chính sách noindex phù hợp. Noindex và robots.txt không bảo vệ dữ liệu riêng tư.
+- Trang không tồn tại phải trả HTTP 404 thực; cấu hình cùng hosting để tránh soft 404.
+- Ảnh có nội dung dùng alt mô tả; ảnh trang trí dùng alt rỗng.
+- Structured data chỉ mô tả thông tin thật trên trang và đúng loại được hỗ trợ; không tạo đánh giá giả.
+- Thêm metadata chia sẻ mạng xã hội khi cần; không xem đó là bảo đảm thứ hạng SEO.
+- Kiểm tra khả năng lập chỉ mục qua Search Console sau triển khai; không cam kết thứ hạng.
+
+## Checklist hoàn thành
+
+- [ ] Đúng yêu cầu và dữ liệu nghiệp vụ; không mở rộng phạm vi ngoài yêu cầu.
+- [ ] UI hoạt động trên mobile và desktop; hỗ trợ bàn phím.
+- [ ] Đủ trạng thái tải, lỗi, thành công và không có dữ liệu.
+- [ ] Lint và build thành công; không có lỗi console liên quan.
+- [ ] Kiểm tra luồng chính, lỗi API và ngăn gửi lặp khi liên quan.
+- [ ] Kiểm tra bảo mật, hiệu suất và SEO trong phạm vi thay đổi.
+- [ ] Không có nội dung giả hoặc dữ liệu mẫu không được đánh dấu.
+- [ ] Báo rõ kiểm tra đã chạy, kết quả và hạn chế còn lại.
+
+## Tài liệu tham khảo
+
+- Core Web Vitals: https://web.dev/articles/vitals
+- JavaScript SEO: https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics
+- OWASP HTML5 Security: https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html

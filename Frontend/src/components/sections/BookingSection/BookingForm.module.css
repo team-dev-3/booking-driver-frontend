@@ -1,0 +1,30 @@
+:global(#stitch-page) .card { min-width: 0; padding: var(--space-6); background: rgb(63 63 63 / .94); color: var(--color-white); border-radius: var(--radius-lg); }
+:global(#stitch-page) .modes { display: flex; justify-content: center; gap: var(--space-1); width: fit-content; max-width: 100%; margin: 0 auto var(--space-4); padding: 0; border: 0; border-radius: 0; background: transparent; }
+:global(#stitch-page) :global(#booking-form) .mode { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-width: 112px; min-height: 44px; padding: var(--space-2) var(--space-4); border-radius: var(--radius-sm); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); color: var(--color-white); border: 1px solid var(--color-border-strong); }
+:global(#stitch-page) .mode[aria-pressed="true"] { background: var(--color-coral); color: var(--color-white); box-shadow: var(--shadow-sm); }
+:global(#stitch-page) .mode:hover { box-shadow: var(--shadow-sm); }
+:global(#stitch-page) .form { display: grid; gap: var(--space-4); }
+:global(#stitch-page) .group { display: grid; gap: var(--space-4); min-width: 0; }
+:global(#stitch-page) .group legend { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+:global(#stitch-page) .row { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+:global(#stitch-page) .field { min-width: 0; }
+:global(#stitch-page) .field > label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+:global(#stitch-page) .controlWrap { position: relative; min-width: 0; }
+:global(#stitch-page) .control { display: block; width: 100%; min-width: 0; height: 44px; padding: var(--space-3) var(--space-3) var(--space-3) var(--space-10); border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); background: var(--color-white); color: var(--color-text); font-size: var(--font-size-base); line-height: var(--line-height-normal); transition: border-color var(--transition-fast), box-shadow var(--transition-fast); }
+:global(#stitch-page) select.control { appearance: none; padding-right: var(--space-8); }
+:global(#stitch-page) .control::placeholder { color: var(--color-text-muted); }
+:global(#stitch-page) .control:hover { border-color: var(--color-text-muted); }
+:global(#stitch-page) .control:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+:global(#stitch-page) .control[aria-invalid="true"] { border-color: var(--color-error); }
+:global(#stitch-page) .fieldIcon { position: absolute; top: 50%; left: var(--space-3); width: 20px; height: 20px; transform: translateY(-50%); color: var(--color-text-secondary); pointer-events: none; }
+:global(#stitch-page) .chevron { position: absolute; top: 50%; right: var(--space-3); width: 16px; height: 16px; transform: translateY(-50%); color: var(--color-text-muted); pointer-events: none; }
+:global(#stitch-page) .error { margin-top: var(--space-2); color: var(--color-yellow-light); font-size: var(--font-size-xs); }
+:global(#stitch-page) .options { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); }
+:global(#stitch-page) .options label { display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--touch-target); font-size: var(--font-size-sm); cursor: pointer; }
+:global(#stitch-page) .squareChoice { appearance: none; flex-shrink: 0; width: var(--space-4); height: var(--space-4); border: 1px solid var(--color-border-strong); border-radius: 0; background: var(--color-white); cursor: pointer; }
+:global(#stitch-page) .squareChoice:checked { border-color: var(--color-primary); background-color: var(--color-primary); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 8 3 3 7-7' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+:global(#stitch-page) .actions { padding-top: var(--space-2); }
+:global(#stitch-page) :global(#booking-form) .submit { display: flex; align-items: center; justify-content: center; gap: var(--space-3); width: 100%; min-height: 44px; padding: var(--space-3) var(--space-5); border-radius: var(--radius-md); background: #000; color: var(--color-white); font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); transition: background var(--transition-fast); }
+:global(#stitch-page) .submit:hover { background: var(--color-text); }
+:global(#stitch-page) .actions p { margin-top: var(--space-3); color: var(--color-border); font-size: var(--font-size-xs); line-height: var(--line-height-normal); text-align: center; }
+@media(min-width: 600px) { :global(#stitch-page) .row { grid-template-columns: repeat(2, minmax(0, 1fr)); } :global(#stitch-page) .card { padding: var(--space-8); } }

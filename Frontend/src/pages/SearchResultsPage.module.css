@@ -1,0 +1,100 @@
+.page {
+  padding-block: var(--space-10) var(--space-16);
+}
+.back {
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-accent-dark);
+  font-size: var(--font-size-sm);
+}
+.page h1 {
+  font-size: var(--font-size-3xl);
+  margin-block: var(--space-3);
+}
+.notice {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  max-width: 80ch;
+  margin-bottom: var(--space-8);
+}
+.layout {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+}
+.layout h2 {
+  font-size: var(--font-size-xl);
+  overflow-wrap: anywhere;
+}
+.summary {
+  color: var(--color-text-secondary);
+  margin-block: var(--space-3) var(--space-6);
+}
+.card {
+  display: grid;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+.card > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card > div {
+  padding: var(--space-5);
+}
+.card h3 {
+  margin-block: var(--space-2);
+}
+.card strong {
+  display: block;
+  color: var(--color-error);
+  margin-block: var(--space-3);
+  font-size: var(--font-size-xl);
+}
+.tag {
+  color: var(--color-teal);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+.card a,
+.empty a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  background: var(--color-primary);
+  min-height: var(--touch-target);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+.empty {
+  text-align: center;
+  border: 1px dashed var(--color-border-strong);
+  padding: var(--space-10) var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-subtle);
+}
+.empty > svg {
+  color: var(--color-accent-dark);
+  margin-bottom: var(--space-4);
+}
+.empty p {
+  color: var(--color-text-secondary);
+  margin-block: var(--space-4);
+}
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 330px minmax(0, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .card {
+    grid-template-columns: 40% minmax(0, 1fr);
+  }
+}

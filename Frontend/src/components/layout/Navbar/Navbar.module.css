@@ -1,0 +1,73 @@
+:global(#stitch-page) .navigation a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding-block: var(--space-2);
+  color: var(--color-text);
+  letter-spacing: 0.025em;
+  transition: color var(--transition-fast);
+}
+:global(#stitch-page) .navigation a::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: var(--space-1);
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
+}
+:global(#stitch-page) .navigation a:hover,
+:global(#stitch-page) .navigation a[aria-current] {
+  color: var(--color-teal);
+}
+:global(#stitch-page) .navigation a[aria-current]::after,
+:global(#stitch-page) .navigation a:hover::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(#stitch-page) .navigation a,
+  :global(#stitch-page) .navigation a::after { transition: none; }
+}
+
+:global(#stitch-page) .menuRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+:global(#stitch-page) .navigation { min-width: 0; }
+:global(#stitch-page) .menuList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+:global(#stitch-page) .menuList > li { flex-shrink: 0; }
+:global(#stitch-page) .navigation a { white-space: nowrap; }
+:global(#stitch-page) .quickSearch {
+  flex: 0 0 176px;
+  min-width: 0;
+}
+:global(#stitch-page) .quickSearch form { width: 100%; }
+:global(#stitch-page) .quickSearch input {
+  width: 100%;
+  min-width: 0;
+  height: var(--touch-target);
+  padding: var(--space-2) var(--space-12) var(--space-2) var(--space-4);
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border);
+}
+@media (min-width: 1024px) {
+  :global(#stitch-page) .menuList { gap: var(--space-8); font-size: var(--font-size-card); }
+  :global(#stitch-page) .quickSearch { flex-basis: 208px; }
+}
+@media (max-width: 767px) {
+  :global(#stitch-page) .menuRow { gap: var(--space-3); }
+  :global(#stitch-page) .quickSearch { flex: 0 1 auto; width: 100%; }
+}

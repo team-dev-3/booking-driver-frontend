@@ -1,0 +1,52 @@
+:global(#stitch-page) .section {
+  padding-block: var(--space-16);
+  background: var(--color-white);
+  overflow: hidden;
+}
+:global(#stitch-page) .container {
+  position: relative;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+:global(#stitch-page) .heading {
+  position: relative;
+  z-index: 2;
+  margin-bottom: var(--space-8);
+  color: var(--color-text);
+  font-size: clamp(1.5rem, 2.3vw, 1.875rem);
+  font-weight: 800;
+  line-height: var(--line-height-tight);
+}
+:global(#stitch-page) .panel { position: relative; }
+:global(#stitch-page) .formArea { position: relative; z-index: 2; min-width: 0; }
+/* Display the supplied transparent artwork without its empty canvas margins. */
+:global(#stitch-page) .artwork {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 822 / 746;
+  overflow: hidden;
+  pointer-events: none;
+  margin-top: var(--space-6);
+}
+:global(#stitch-page) .artwork img {
+  position: absolute;
+  width: 233.58%;
+  max-width: none;
+  height: 144.77%;
+  left: -93.19%;
+  top: -22.39%;
+}
+@media(min-width: 960px) {
+  :global(#stitch-page) .heading { max-width: 55%; }
+  :global(#stitch-page) .formArea { width: 50%; }
+  :global(#stitch-page) .artwork {
+    position: absolute;
+    z-index: 1;
+    width: 72%;
+    right: -4%;
+    top: -112px;
+    margin: 0;
+  }
+  :global(#stitch-page) .panel { min-height: 620px; }
+}

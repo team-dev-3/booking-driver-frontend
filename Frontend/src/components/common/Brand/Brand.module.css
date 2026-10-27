@@ -1,0 +1,26 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-height: var(--touch-target);
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  background: var(--color-text);
+}
+
+.brand picture,
+.brand img {
+  display: block;
+  width: 36px;
+  height: 40px;
+  object-fit: contain;
+}
+
+@media (min-width: 640px) {
+  .brand:not(.compact) picture,
+  .brand:not(.compact) img {
+    width: 160px;
+    height: 54px;
+  }
+}

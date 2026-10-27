@@ -1,0 +1,17 @@
+﻿node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.agents/
+artifacts/
+/Untitled.zip
+/Html → Body.png
+
+# Project guidance is part of the repository.
+!/AGENTS.md
+!/Frontend.mdc
+!/GEMINI.md

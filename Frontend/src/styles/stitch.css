@@ -1,0 +1,174 @@
+/* Local presentation of the selected Stitch screen. Utilities are scoped to #stitch-page. */
+#stitch-page {
+  color: #334155;
+  background: #f8fafc;
+  font-family: var(--font-family);
+  line-height: 1.5;
+}
+#stitch-page *,
+#stitch-page ::before,
+#stitch-page ::after {
+  border-style: solid;
+  border-width: 0;
+  border-color: #e5e7eb;
+}
+#stitch-page h1,
+#stitch-page h2,
+#stitch-page h3,
+#stitch-page h4 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+#stitch-page button,
+#stitch-page input,
+#stitch-page select {
+  font: inherit;
+}
+#stitch-page button,
+#stitch-page input:not([type="checkbox"]):not([type="radio"]),
+#stitch-page select {
+  min-height: 44px;
+}
+#stitch-page button,
+#stitch-page a {
+  touch-action: manipulation;
+}
+#stitch-page button {
+  min-width: 44px;
+}
+#stitch-page input::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+#stitch-page table {
+  border-collapse: collapse;
+  text-indent: 0;
+}
+#stitch-page .stitch-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+#stitch-page .card-shadow {
+  box-shadow: 0 4px 20px -2px rgb(0 0 0 / 0.05);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+#stitch-page .card-shadow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -5px rgb(0 0 0 / 0.1);
+}
+#stitch-page .hero-glow {
+  text-shadow: 0 2px 12px rgb(0 0 0 / 0.3);
+}
+#stitch-page .parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#stitch-page section[id],
+#stitch-page footer[id] {
+  scroll-margin-top: 150px;
+}
+#stitch-page .stitch-dialog[open] {
+  display: flex;
+  max-width: none;
+  max-height: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+}
+#stitch-page .stitch-dialog::backdrop {
+  background: transparent;
+}
+#stitch-page .stitch-skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  transform: translateY(-180%);
+  z-index: 100;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+#stitch-page .stitch-skip:focus {
+  transform: none;
+}
+@media (max-width: 767px) {
+  #stitch-page .stitch-navigation:not(.is-open) {
+    display: none;
+  }
+  #stitch-page .stitch-navigation > div {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #stitch-page .stitch-navigation nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  #stitch-page .stitch-navigation nav a {
+    padding: 12px;
+  }
+  #stitch-page .stitch-navigation form {
+    width: 100%;
+  }
+  #stitch-page .parallax-bg {
+    background-attachment: scroll;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #stitch-page *,
+  #stitch-page ::before,
+  #stitch-page ::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  #stitch-page .parallax-bg {
+    background-attachment: scroll;
+  }
+  #stitch-page .card-shadow:hover {
+    transform: none;
+  }
+}
+
+@media(max-width:767px){
+ #stitch-page .stitch-navigation nav ul {flex-direction:column;align-items:stretch;gap:0;}
+ #stitch-page .stitch-navigation nav ul > li {margin-left:0;}
+ #stitch-page .stitch-navigation nav a {display:flex;min-height:44px;}
+ #stitch-page .stitch-quick-search input {width:100%;}
+}
+
+#stitch-page a.inline-flex {min-height:44px;}
+#stitch-page label:has(> input[type="checkbox"]),#stitch-page label:has(> input[type="radio"]) {min-height:44px;}
+
+/* Keep action corners subtle and vehicle cards clearly outlined. */
+#stitch-page button[class],
+#stitch-page a[class*="bg-"] {
+  border-radius: var(--radius-sm);
+}
+
+#stitch-page #detailed-services article,
+#stitch-page #pricing-grid article {
+  border: 1px solid var(--color-border-strong);
+}
+
+/* Route actions wrap instead of creating a scrollable strip on touch screens. */
+#stitch-page .hero-routes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-1);
+}
+
+#stitch-page .hero-routes a:hover,
+#stitch-page .hero-routes a:active {
+  transform: none;
+}
